@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces */
+  --color-bg: #fdfcf9;
+  --color-surface: #ffffff;
+  --color-surface-2: #faf9f6;
+  --color-surface-offset: #f4f1ea;
+  --color-divider: #e5e1d8;
+  --color-border: #dcd7cc;
+
+  /* Text */
+  --color-text: #121110;
+  --color-text-muted: #5e5a54;
+  --color-text-faint: #a6a198;
+  --color-text-inverse: #fdfcf9;
+
+  /* Primary: Deep Charcoal Navy */
+  --color-navy: #0f172a;
+  --color-navy-hover: #1e293b;
+  --color-navy-active: #334155;
+  --color-navy-highlight: #e2e8f0;
+
+  /* Accent: Royal Gold */
+  --color-gold: #927321;
+  --color-gold-hover: #7b611c;
+  --color-gold-active: #644f17;
+  --color-gold-highlight: #fdf6e3;
+
+  /* Fonts */
+  --font-display: 'Instrument Serif', 'Playfair Display', Georgia, serif;
+  --font-body: 'Work Sans', 'Inter', 'Helvetica Neue', sans-serif;
+
+  --radius-none: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+
+  --transition-ultra: 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  --color-bg: #050505;
+  --color-surface: #0a0a0a;
+  --color-surface-2: #111111;
+  --color-surface-offset: #161616;
+  --color-divider: #262626;
+  --color-border: #333333;
+  --color-text: #f0f0f0;
+  --color-text-muted: #a0a0a0;
+  --color-text-faint: #555555;
+  --color-text-inverse: #050505;
+  --color-navy: #cbd5e1;
+  --color-navy-hover: #94a3b8;
+  --color-navy-active: #64748b;
+  --color-navy-highlight: #0f172a;
+  --color-gold: #e2bc5e;
+  --color-gold-hover: #f0d080;
+  --color-gold-active: #f8e1a0;
+  --color-gold-highlight: #1a1508;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    @apply text-text bg-bg;
+  }
+  body {
+    @apply font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-navy;
+  }
+}
+
+.text-fluid-lg  { font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); }
+.text-fluid-xl  { font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem); }
+.text-fluid-2xl { font-size: clamp(2.25rem, 1.5rem + 3vw, 4.5rem); }
+.text-fluid-3xl { font-size: clamp(3rem, 1.5rem + 5vw, 7rem); }
+
+.section-padding { @apply py-24 md:py-40; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition-ultra);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skew-bg      { transform: skewY(-2deg); }
+.unskew-content { transform: skewY(2deg); }
