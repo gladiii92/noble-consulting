@@ -283,9 +283,9 @@ export default function App() {
         <section id="erfolge" className="border-b border-divider">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-divider">
             {[
-              { label: 'Nachweisbare Ersparnis', value: 30000, suffix: ' €' },
-              { label: 'Eigene Betriebe aufgebaut', value: 2, suffix: ' Exits' },
-              { label: 'Operative Erfahrung', value: 10, suffix: ' Jahre+' },
+              { label: 'Nachweisbare Ersparnis', value: 65000, suffix: ' €+' },
+              { label: 'Eigene Betriebe aufgebaut', value: 4, suffix: ' Exits' },
+              { label: 'Operative Erfahrung', value: 15, suffix: ' Jahre+' },
               { label: 'Zielgruppe', value: 30, prefix: '1–', suffix: ' MA' },
             ].map((stat, i) => (
               <div key={i} className="p-10 md:p-12 flex flex-col justify-center group hover:bg-surface-offset transition-colors duration-700">
