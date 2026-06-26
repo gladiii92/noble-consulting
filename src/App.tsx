@@ -484,7 +484,7 @@ export default function App() {
                       <div className="w-12 h-12 flex items-center justify-center border border-white/20 group-hover:border-gold group-hover:bg-gold transition-all">
                         <Mail size={18} />
                       </div>
-                      <span className="text-sm tracking-widest font-bold">kontakt@heinke.consulting</span>
+                      <span className="text-sm tracking-widest font-bold">kontakt@noble-consulting.de</span>
                    </div>
                    <div className="flex items-center gap-6 group cursor-pointer">
                       <div className="w-12 h-12 flex items-center justify-center border border-white/20 group-hover:border-gold group-hover:bg-gold transition-all">
@@ -539,7 +539,7 @@ export default function App() {
         <div className="space-y-6">
           <section>
             <h4 className="text-lg font-bold text-navy">1. Verantwortlicher</h4>
-            <p>David Heinke, NobleConsulting<br />[Deine Adresse], 96215 Lichtenfels<br />E-Mail: kontakt@noble-consulting.de</p>
+            <p>David Heinke, NobleConsulting<br />Friedrich-Ebert-Straße 85, 96215 Lichtenfels<br />E-Mail: kontakt@noble-consulting.de</p>
           </section>
 
           <section>
@@ -626,13 +626,21 @@ export default function App() {
 }
 
 function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('submitting');
-    setTimeout(() => setStatus('success'), 1500);
-  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('submitting')
+    const data = new FormData(e.currentTarget)
+
+    const res = await fetch('https://formspree.io/f/mwvdoenj', {
+      method: 'POST',
+      body: data,
+      headers: { Accept: 'application/json' },
+    })
+
+    res.ok ? setStatus('success') : setStatus('error')
+  }
 
   if (status === 'success') {
     return (
@@ -641,7 +649,16 @@ function ContactForm() {
         <h3 className="text-3xl mb-4 leading-tight">Vielen Dank.</h3>
         <p className="text-text-muted">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
       </motion.div>
-    );
+    )
+  }
+
+  if (status === 'error') {
+    return (
+      <div className="text-center py-20">
+        <p className="text-red-500 font-bold mb-4">Fehler beim Senden.</p>
+        <p className="text-text-muted text-sm">Bitte schreibe direkt an <a href="mailto:kontakt@noble-consulting.de" className="text-navy underline">kontakt@noble-consulting.de</a></p>
+      </div>
+    )
   }
 
   return (
@@ -649,16 +666,29 @@ function ContactForm() {
       <div className="grid md:grid-cols-2 gap-10">
         <div className="space-y-4">
           <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-text-muted">Ihr Name</label>
-          <input required type="text" className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors" />
+          <input
+            required
+            type="text"
+            name="name"
+            className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors"
+          />
         </div>
         <div className="space-y-4">
           <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-text-muted">E-Mail Adresse</label>
-          <input required type="email" className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors" />
+          <input
+            required
+            type="email"
+            name="email"
+            className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors"
+          />
         </div>
       </div>
       <div className="space-y-4">
         <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-text-muted">Mitarbeiteranzahl</label>
-        <select className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors appearance-none">
+        <select
+          name="mitarbeiter"
+          className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors appearance-none"
+        >
           <option>1 - 10 Mitarbeiter</option>
           <option>11 - 30 Mitarbeiter</option>
           <option>ab 30 Mitarbeiter</option>
@@ -666,15 +696,19 @@ function ContactForm() {
       </div>
       <div className="space-y-4">
         <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-text-muted">Ihre Nachricht</label>
-        <textarea rows={3} className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors resize-none" />
+        <textarea
+          rows={3}
+          name="nachricht"
+          className="w-full bg-transparent border-b border-divider py-2 focus:outline-none focus:border-navy transition-colors resize-none"
+        />
       </div>
-      <button 
+      <button
         disabled={status === 'submitting'}
         className="w-full bg-navy text-white text-[11px] uppercase tracking-[0.3em] font-bold py-6 hover:bg-gold transition-all duration-500 disabled:opacity-50"
       >
         {status === 'submitting' ? 'Wird gesendet...' : 'Erstgespräch anfragen'}
       </button>
     </form>
-  );
+  )
 }
 
