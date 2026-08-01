@@ -20,7 +20,11 @@ import {
   MapPin,
   Mail,
   Phone,
-  Globe
+  Globe,
+  Settings,
+  Cpu,
+  RefreshCw,
+  Clock
 } from 'lucide-react';
 
 // --- Visual Assets ---
@@ -30,6 +34,7 @@ const ASSETS = {
   analysis: "/bilder/analysis.png",
   optimierung: "/bilder/optimierung.png",
   gbp: "/bilder/gbp.png",
+  digital: "/bilder/gbp.png",
 };
 
 // --- Modal Helper ---
@@ -116,7 +121,6 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'light' | 'dark', toggleTheme: 
 
   useEffect(() => {
     const handleScroll = () => {
-      // Transition when leaving hero (approx 80vh)
       setIsScrolled(window.scrollY > window.innerHeight * 0.8);
     };
     window.addEventListener('scroll', handleScroll);
@@ -124,14 +128,12 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'light' | 'dark', toggleTheme: 
   }, []);
 
   const navLinks = [
+    { name: 'Automatisierung', href: '#automatisierung' },
     { name: 'Strategie', href: '#strategie' },
     { name: 'Erfolge', href: '#erfolge' },
-    { name: 'Expertise', href: '#expertise' },
     { name: 'Kontakt', href: '#kontakt' },
   ];
 
-  // Logic for colors: Initial state (at top) is white text for the dark hero overlap. 
-  // Scrolled state is Navy. Dark mode always prefers Light/Gold accents.
   const navColorClass = isScrolled ? 'text-navy' : 'text-white';
   const iconColorClass = isScrolled ? 'text-navy/60' : 'text-white';
   const dividerClass = isScrolled ? 'bg-divider' : 'bg-white/20';
@@ -147,7 +149,6 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'light' | 'dark', toggleTheme: 
           </div>
         </a>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-12">
           {navLinks.map(link => (
             <a key={link.name} href={link.href} className={`text-[11px] uppercase tracking-widest font-bold transition-colors hover:text-gold ${navColorClass}`}>
@@ -163,7 +164,6 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'light' | 'dark', toggleTheme: 
           </a>
         </div>
 
-        {/* Mobile Toggle */}
         <div className="flex md:hidden items-center gap-6">
           <button onClick={toggleTheme} className={`${isScrolled ? 'text-navy' : 'text-white'}`}>
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
@@ -226,7 +226,7 @@ export default function App() {
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       <main>
-        {/* --- HERO: UNIFIED DARK --- */}
+        {/* --- HERO: AUTOMATISIERUNG FIRST --- */}
         <section className="relative min-h-[90vh] md:h-screen flex items-stretch border-b border-divider pt-20 md:pt-0 bg-navy text-white">
           <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-20 relative z-10">
             <motion.div 
@@ -238,27 +238,27 @@ export default function App() {
                 <div className="h-px w-12 bg-gold" />
                 <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-gold">NobleConsulting</span>
               </div>
-              <h1 className="text-fluid-3xl leading-[0.9] mb-10 max-w-[12ch] text-white">
-                Klarheit. <br />
-                <span className="italic font-normal text-gold">Struktur.</span> <br />
-                Wachstum.
+              <h1 className="text-fluid-3xl leading-[0.9] mb-10 max-w-[14ch] text-white">
+                Prozesse, <br />
+                <span className="italic font-normal text-gold">die laufen –</span> <br />
+                ohne Sie.
               </h1>
               <p className="text-lg md:text-xl text-white/70 mb-12 max-w-lg leading-[1.6]">
-                Wir optimieren den Mittelstand. <br className="hidden md:block" />
-                Strategische Beratung für inhabergeführte Unternehmen <br className="md:hidden" /> von&nbsp;<span className="inline-block text-gold font-bold whitespace-nowrap">1 bis 30 Mitarbeitern</span>. <br />
-                Ob Wachstum, Optimierung oder Krisenmanagement – wir schaffen Stabilität.
+                Strategische Beratung und Automatisierung wiederkehrender Aufgaben inhabergeführter Unternehmen <br className="md:hidden" /> von&nbsp;<span className="inline-block text-gold font-bold whitespace-nowrap">1 bis 30 Mitarbeitern</span> – 
+                von internen Abläufen bis zur digitalen Sichtbarkeit. <br /> <br />
+                Das Fundament dafür legt klassische Beratung: <br /> erst verstehen, dann entlasten.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                 <a href="#kontakt" className="group bg-gold text-white px-12 py-5 font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white hover:text-navy transition-all duration-500">
                   Erstgespräch <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </a>
-                <a href="#strategie" className="px-12 py-5 font-bold uppercase tracking-widest text-xs border border-white/20 text-white hover:bg-white/5 transition-all text-center">
-                  Unsere Strategie
+                <a href="#automatisierung" className="px-12 py-5 font-bold uppercase tracking-widest text-xs border border-white/20 text-white hover:bg-white/5 transition-all text-center">
+                  Wie das funktioniert
                 </a>
               </div>
             </motion.div>
           </div>
-          
+
           <div className="flex-1 relative hidden lg:block overflow-hidden">
             <motion.img 
               initial={{ scale: 1.2, opacity: 0 }}
@@ -273,20 +273,20 @@ export default function App() {
             <div className="absolute bottom-20 left-20 right-20">
               <div className="h-px w-20 bg-gold mb-8" />
               <p className="text-3xl font-display text-white italic max-w-sm">
-                „Erfolg ist kein Zufall, sondern das Ergebnis präziser Prozesse und klarer Zahlen.“
+                „Der beste Prozess ist der, um den sich niemand mehr kümmern muss."
               </p>
             </div>
           </div>
         </section>
 
-        {/* --- IMPACT: MINIMAL GRID --- */}
+        {/* --- IMPACT: MINIMAL GRID (AUTOMATION-WEIGHTED) --- */}
         <section id="erfolge" className="border-b border-divider">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-divider">
             {[
+              { label: 'Automatisierte Prozesse im Einsatz', value: 12, suffix: '+' },
+              { label: 'Zeitersparnis / Woche & Kunde', value: 8, suffix: ' Std.+' },
               { label: 'Nachweisbare Ersparnis', value: 65000, suffix: ' €+' },
-              { label: 'Eigene Betriebe aufgebaut', value: 4, suffix: ' Exits' },
               { label: 'Operative Erfahrung', value: 15, suffix: ' Jahre+' },
-              { label: 'Zielgruppe', value: 30, prefix: '1–', suffix: ' MA' },
             ].map((stat, i) => (
               <div key={i} className="p-10 md:p-12 flex flex-col justify-center group hover:bg-surface-offset transition-colors duration-700">
                 <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-gold mb-4 group-hover:translate-x-2 transition-transform duration-500">{stat.label}</span>
@@ -298,13 +298,101 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- STRATEGIE: EDITORIAL ROWS --- */}
+        {/* --- AUTOMATISIERUNG: DEDIZIERTE SEKTION (3-STUFEN-PROZESS) --- */}
+        <section id="automatisierung" className="section-padding bg-navy text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--color-gold) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          <div className="container mx-auto px-8 relative z-10">
+            <SectionHeading subtitle="Kernangebot" light>Automatisierung, <br />die sich amortisiert.</SectionHeading>
+
+            <div className="grid md:grid-cols-3 gap-1 mb-24">
+              {[
+                {
+                  icon: <Target />,
+                  step: "01",
+                  title: "Analyse",
+                  desc: "Wir identifizieren die wiederkehrenden Aufgaben in Ihrem Betrieb, die Zeit binden, aber keinen strategischen Wert schaffen."
+                },
+                {
+                  icon: <Cpu />,
+                  step: "02",
+                  title: "Automatisierung",
+                  desc: "Diese Aufgaben werden systematisch durch digitale Systeme übernommen – von Sichtbarkeit bis internen Abläufen, im Hintergrund."
+                },
+                {
+                  icon: <RefreshCw />,
+                  step: "03",
+                  title: "Betrieb & Skalierung",
+                  desc: "Die Systeme laufen fortlaufend, werden überwacht und erweitert, sobald neue Engpässe im Betrieb sichtbar werden."
+                }
+              ].map((phase, i) => (
+                <div key={i} className="p-12 border border-white/10 hover:bg-white/5 transition-colors group">
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="text-gold group-hover:scale-110 transition-transform">{phase.icon}</div>
+                    <span className="text-4xl font-display text-white/10">{phase.step}</span>
+                  </div>
+                  <h4 className="text-2xl font-medium text-white mb-4">{phase.title}</h4>
+                  <p className="text-white/60 leading-relaxed text-sm">{phase.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-gold mb-6 block">Beispiel aus der Praxis</span>
+                <h3 className="text-3xl md:text-4xl mb-8 leading-tight text-white">
+                  Digitale Sichtbarkeit, <br /><span className="italic font-normal text-gold-highlight">die von selbst weiterläuft.</span>
+                </h3>
+                <p className="text-lg text-white/70 mb-8 leading-relaxed">
+                  Regionale Marktführerschaft beginnt online – und endet nicht dort. Wir betreuen Ihr Google Business Profile (GBP) 
+                  fortlaufend für maximale Reichweite und identifizieren zusätzlich, welche wiederkehrenden 
+                  Aufgaben in Ihrem Betrieb sich sinnvoll automatisieren lassen. Mehr Anrufe, mehr Kunden, mehr Umsatz – ohne zusätzlichen Aufwand für Sie.
+                </p>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="p-6 bg-white/5 border border-white/10">
+                    <p className="text-3xl font-display text-gold mb-1">+45%</p>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-white/50">Mehr Anfragen</p>
+                  </div>
+                  <div className="p-6 bg-white/5 border border-white/10">
+                    <p className="text-3xl font-display text-white">Top 3</p>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-white/50">Ranking</p>
+                  </div>
+                  <div className="p-6 bg-white/5 border border-white/10 col-span-2 lg:col-span-1">
+                    <p className="text-3xl font-display text-gold mb-1">~2.400€</p>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-white/50">Mehrumsatz / Monat</p>
+                  </div>
+                </div>
+              </div>
+              <div className="relative aspect-video bg-navy overflow-hidden group border border-white/10">
+                <img 
+                  src={ASSETS.gbp} 
+                  alt="Digitale Automatisierung" 
+                  className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000 blur-[2px] group-hover:blur-0"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- STRATEGIE: EDITORIAL ROWS (AUTOMATION-LED) --- */}
         <section id="strategie" className="section-padding bg-surface">
           <div className="container mx-auto px-8">
             <SectionHeading subtitle="Methodik">Der Weg zur Marktführerschaft</SectionHeading>
-            
+
             <div className="space-y-32 md:space-y-64">
               {[
+                {
+                  title: "Digitale Effizienz",
+                  desc: "Viele wiederkehrende Aufgaben – von der Online-Sichtbarkeit bis zu internen Abläufen – lassen sich heute systematisch entlasten, ohne dass Sie sich selbst mit Technik befassen müssen. Wir übernehmen das operativ, im Hintergrund, mit messbarem Ergebnis.",
+                  impact: "Zeitersparnis und Sichtbarkeit, ohne zusätzlichen Verwaltungsaufwand.",
+                  img: ASSETS.gbp
+                },
+                {
+                  title: "Prozess-Automatisierung",
+                  desc: "Von der Angebotserstellung bis zur Terminvergabe: Wir bauen kleine, robuste Systeme, die repetitive Abläufe in Ihrem Betrieb dauerhaft übernehmen – abgestimmt auf Ihre bestehenden Werkzeuge statt eines teuren Komplett-Umbaus.",
+                  impact: "Weniger Verwaltungsaufwand, mehr Zeit für das Kerngeschäft.",
+                  img: ASSETS.optimierung
+                },
                 {
                   title: "Kosten & Prozesse",
                   desc: "Jede Kostenposition wird hinterfragt, jeder Ablauf auf Effizienz geprüft – nicht theoretisch, sondern aus der Praxis eines ehemaligen Geschäftsführers. Was nicht messbar besser wird, bleibt raus.",
@@ -315,12 +403,6 @@ export default function App() {
                   title: "Restrukturierung & Krisen",
                   desc: "Betriebe in schwierigen Phasen brauchen keine Folien, sondern klare Entscheidungen. Erfahrung aus dem Aufbau und der Sanierung eigener Unternehmen – kein Berater der nie selbst Unternehmer war.",
                   impact: "Stabilisierung durch operative Maßnahmen statt Konzeptpapiere.",
-                  img: ASSETS.optimierung
-                },
-                {
-                  title: "Wachstum & Exit",
-                  desc: "Umsatz verdreifacht, Rentabilität verdoppelt, erfolgreicher Unternehmensverkauf – diese Erfahrung fließt direkt in die Begleitung von Wachstumsphasen und Nachfolgeprozessen ein.",
-                  impact: "Maximale Bewertung bei geordnetem Übergang.",
                   img: ASSETS.portrait
                 }
               ].map((item, i) => (
@@ -353,49 +435,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- GBP FOCUS: REGIONALE DOMINANZ --- */}
-        <section className="py-24 bg-surface-offset border-b border-divider">
-          <div className="container mx-auto px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-gold mb-6 block">Lokale Dominanz</span>
-                <h2 className="text-fluid-2xl leading-[1.05] text-navy mb-8">
-                  Google Business Profile: <br />
-                  <span className="italic font-normal">Sichtbarkeit</span> die konvertiert.
-                </h2>
-                <p className="text-lg text-text-muted mb-8 leading-relaxed">
-                  Regionale Marktführerschaft beginnt bei Google. Wir optimieren Ihr Google Business Profile (GBP) 
-                  für maximale Reichweite in Oberfranken und Umgebung. Mehr Anrufe, mehr Kunden, mehr Umsatz.
-                </p>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
-                  <div className="p-6 bg-white border border-divider">
-                    <p className="text-3xl font-display text-gold mb-1">+45%</p>
-                    <p className="text-[10px] uppercase tracking-widest font-bold text-text-muted">Mehr Anfragen</p>
-                  </div>
-                  <div className="p-6 bg-white border border-divider">
-                    <p className="text-3xl font-display text-navy">Top 3</p>
-                    <p className="text-[10px] uppercase tracking-widest font-bold text-text-muted">Ranking</p>
-                  </div>
-                  <div className="p-6 bg-white border border-divider col-span-2 lg:col-span-1">
-                    <p className="text-3xl font-display text-gold mb-1">~2.400€</p>
-                    <p className="text-[10px] uppercase tracking-widest font-bold text-text-muted">Mehrumsatz / Monat</p>
-                  </div>
-                </div>
-              </div>
-              <div className="relative aspect-video bg-navy overflow-hidden group border border-divider">
-                <img 
-                  src={ASSETS.gbp} 
-                  alt="Digital Growth" 
-                  className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000 blur-[2px] group-hover:blur-0"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* --- EXPERTISE: BENTO BOX --- */}
         <section id="expertise" className="section-padding bg-navy text-white relative overflow-hidden">
            {/* Background Pattern */}
@@ -406,11 +445,12 @@ export default function App() {
              
              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-1">
                {[
+                 { icon: <Settings />, title: "Automatisierte Prozessentlastung" },
+                 { icon: <Globe />, title: "Digitale Sichtbarkeit & Systeme" },
+                 { icon: <Clock />, title: "Wiederkehrende Aufgaben eliminieren" },
+                 { icon: <Cpu />, title: "Regionale Dominanz (GBP)" },
                  { icon: <Target />, title: "Krisenmanagement" },
                  { icon: <BarChart3 />, title: "Profitabilitäts-Analyse" },
-                 { icon: <Globe />, title: "Regionale Dominanz (GBP)" },
-                 { icon: <Zap />, title: "Prozess-Optimierung" },
-                 { icon: <CheckCircle2 />, title: "Restrukturierung" },
                  { icon: <ArrowUpRight />, title: "M&A Beratung" },
                ].map((skill, i) => (
                  <div key={i} className="p-12 border border-white/10 hover:bg-white/5 transition-colors group">
@@ -423,7 +463,7 @@ export default function App() {
         </section>
 
         {/* --- ABOUT: THE FACE --- */}
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-surface">
            <div className="container mx-auto px-8">
              <div className="grid lg:grid-cols-2 gap-24 items-center">
                 <div className="aspect-[3/4] relative overflow-hidden bg-surface-offset border border-divider">
@@ -434,10 +474,10 @@ export default function App() {
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute bottom-0 left-0 bg-gold text-white px-8 py-4 font-bold uppercase tracking-widest text-[10px]">
-                    GF Erfahrung & Finanzprofi
+                    GF Erfahrung & Automatisierungs-Profi
                   </div>
                 </div>
-                
+
                 <div>
                   <SectionHeading subtitle="Profil">David Heinke</SectionHeading>
                   <div className="space-y-8 text-xl text-text-muted font-light leading-relaxed">
@@ -448,16 +488,17 @@ export default function App() {
                       nicht stimmt.
                     </p>
                     <p>
-                      Ich habe Betriebe nicht nur begleitet – ich habe sie selbst aufgebaut, 
-                      skaliert und erfolgreich verkauft. Dieser Hintergrund ist mein Angebot 
-                      an Inhaber in <strong>Oberfranken</strong>, die echte Ergebnisse brauchen.
+                      Aus dieser Erfahrung heraus entstand der Fokus auf Automatisierung: 
+                      Betriebe verlieren am meisten Zeit an Aufgaben, die niemand wirklich 
+                      selbst erledigen will. Genau diese Aufgaben übernehmen wir – dauerhaft.
                     </p>
                     <ul className="grid gap-6 pt-8">
                       {[
+                        'Aufbau digitaler Systeme zur Entlastung im Tagesgeschäft',
+                        'Automatisierung wiederkehrender Abläufe & Sichtbarkeit',
                         'Geschäftsführer in Transport & produzierendem Gewerbe',
                         'Operative Skalierung und erfolgreicher Unternehmensverkauf',
-                        'Fokus auf inhabergeführte KMU mit 1–30 Mitarbeitern',
-                        'Zertifizierter Versicherungskaufmann & Datenanalytik'
+                        'Fokus auf inhabergeführte KMU mit 1–30 Mitarbeitern'
                       ].map((point, i) => (
                         <li key={i} className="flex gap-4 items-center text-navy font-bold text-sm tracking-widest uppercase">
                           <CheckCircle2 size={16} className="text-gold" /> {point}
@@ -475,9 +516,9 @@ export default function App() {
           <div className="container mx-auto px-8">
             <div className="max-w-6xl mx-auto grid lg:grid-cols-5 border border-divider bg-white">
               <div className="lg:col-span-2 bg-navy p-12 md:p-20 text-white">
-                <h2 className="text-fluid-xl text-white mb-8">Bereit für <br />Ergebnisse?</h2>
+                <h2 className="text-fluid-xl text-white mb-8">Bereit, Zeit <br />zurückzugewinnen?</h2>
                 <p className="text-gold-highlight opacity-60 mb-12 leading-relaxed">
-                  Lassen Sie uns unverbindlich prüfen, welche Hebel wir in Ihrem Unternehmen sofort umlegen können.
+                  Lassen Sie uns unverbindlich prüfen, welche Aufgaben in Ihrem Unternehmen sich sofort automatisieren lassen.
                 </p>
                 <div className="space-y-8">
                    <div className="flex items-center gap-6 group cursor-pointer">
@@ -494,7 +535,7 @@ export default function App() {
                    </div>
                 </div>
               </div>
-              
+
               <div className="lg:col-span-3 p-12 md:p-20">
                 <ContactForm />
               </div>
@@ -521,10 +562,10 @@ export default function App() {
         <section className="space-y-4">
           <h4 className="text-lg font-bold text-navy">Angaben gemäß § 5 TMG</h4>
           <p>NobleConsulting<br />David Heinke<br />Strategieberatung für den Mittelstand<br />Friedrich-Ebert-Straße 85<br />96215 Lichtenfels<br />Bayern, Deutschland</p>
-          
+
           <h4 className="text-lg font-bold text-navy pt-4">Kontakt</h4>
           <p>Telefon: +49 (0) 151 68482909<br />E-Mail: kontakt@noble-consulting.de</p>
-          
+
           <h4 className="text-lg font-bold text-navy pt-4">Berufsbezeichnung und berufsrechtliche Regelungen</h4>
           <p>Berufsbezeichnung: Zertifizierter Versicherungskaufmann & Unternehmensberater<br />Zuständige Kammer: IHK für Oberfranken Bayreuth</p>
 
@@ -580,7 +621,7 @@ export default function App() {
         <div className="space-y-6">
           <section>
             <h4 className="text-lg font-bold text-navy">§ 1 Geltungsbereich</h4>
-            <p>Diese AGB gelten für alle Beratungsleistungen von David Heinke, NobleConsulting (nachfolgend „Berater") gegenüber Unternehmern im Sinne des § 14 BGB (nachfolgend „Auftraggeber").</p>
+            <p>Diese AGB gelten für alle Beratungs- und Automatisierungsleistungen von David Heinke, NobleConsulting (nachfolgend „Berater") gegenüber Unternehmern im Sinne des § 14 BGB (nachfolgend „Auftraggeber").</p>
           </section>
 
           <section>
@@ -590,7 +631,7 @@ export default function App() {
 
           <section>
             <h4 className="text-lg font-bold text-navy">§ 3 Leistungsgegenstand</h4>
-            <p>Der Berater erbringt Beratungsleistungen in den Bereichen Prozessoptimierung, Kostenanalyse und Unternehmensstrukturierung. Der Berater schuldet keinen bestimmten wirtschaftlichen Erfolg, sondern fachkundige Beratung und Empfehlungen.</p>
+            <p>Der Berater erbringt Leistungen in den Bereichen Prozessautomatisierung, digitale Sichtbarkeit, Kostenanalyse und Unternehmensstrukturierung. Der Berater schuldet keinen bestimmten wirtschaftlichen Erfolg, sondern fachkundige Umsetzung und Empfehlungen.</p>
           </section>
 
           <section>
@@ -600,7 +641,7 @@ export default function App() {
 
           <section>
             <h4 className="text-lg font-bold text-navy">§ 5 Mitwirkungspflichten</h4>
-            <p>Der Auftraggeber stellt alle für die Beratung erforderlichen Informationen und Unterlagen vollständig und rechtzeitig zur Verfügung. Verzögerungen durch unvollständige Informationen gehen nicht zu Lasten des Beraters.</p>
+            <p>Der Auftraggeber stellt alle für die Beratung und Umsetzung erforderlichen Informationen, Zugänge und Unterlagen vollständig und rechtzeitig zur Verfügung. Verzögerungen durch unvollständige Informationen gehen nicht zu Lasten des Beraters.</p>
           </section>
 
           <section>
@@ -610,7 +651,7 @@ export default function App() {
 
           <section>
             <h4 className="text-lg font-bold text-navy">§ 7 Haftung</h4>
-            <p>Die Haftung des Beraters ist auf Vorsatz und grobe Fahrlässigkeit beschränkt. Eine Haftung für den wirtschaftlichen Erfolg umgesetzter Empfehlungen ist ausgeschlossen. Die Haftung ist der Höhe nach auf das vereinbarte Honorar begrenzt.</p>
+            <p>Die Haftung des Beraters ist auf Vorsatz und grobe Fahrlässigkeit beschränkt. Eine Haftung für den wirtschaftlichen Erfolg umgesetzter Empfehlungen oder automatisierter Systeme ist ausgeschlossen. Die Haftung ist der Höhe nach auf das vereinbarte Honorar begrenzt.</p>
           </section>
 
           <section>
@@ -711,4 +752,3 @@ function ContactForm() {
     </form>
   )
 }
-
