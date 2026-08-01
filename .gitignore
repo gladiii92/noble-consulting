@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+
+#Bürobilder
+public/bilder/1.png
+public/bilder/2.png
