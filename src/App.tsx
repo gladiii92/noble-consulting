@@ -291,7 +291,7 @@ export default function App() {
               <div key={i} className="p-10 md:p-12 flex flex-col justify-center group hover:bg-surface-offset transition-colors duration-700">
                 <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-gold mb-4 group-hover:translate-x-2 transition-transform duration-500">{stat.label}</span>
                 <div className="text-5xl md:text-6xl font-display text-navy">
-                  <Counter target={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
+                  <Counter target={stat.value} suffix={stat.suffix} />
                 </div>
               </div>
             ))}
@@ -369,6 +369,56 @@ export default function App() {
                   className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000 blur-[2px] group-hover:blur-0"
                   referrerPolicy="no-referrer"
                 />
+              </div>
+            </div>
+
+            {/* --- NOBLECOCKPIT (PHASE 0): BWA-QUICK-CHECK FÜR KMU --- */}
+            <div className="mt-20 p-8 md:p-12 bg-white/5 border border-gold/30 relative overflow-hidden backdrop-blur-sm group hover:border-gold hover:bg-white/[0.08] transition-all duration-500">
+              <div className="absolute top-0 right-0 w-72 h-72 bg-gold/10 rounded-full blur-3xl pointer-events-none group-hover:bg-gold/15 transition-colors duration-700" />
+              <div className="grid lg:grid-cols-12 gap-8 items-center relative z-10">
+                <div className="lg:col-span-8">
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <span className="px-3 py-1 bg-gold/15 text-gold text-[10px] font-bold uppercase tracking-widest border border-gold/40 inline-flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+                      Neu
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 font-body">
+                      Finanz- &amp; Kennzahlen-Transparenz
+                    </span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-display text-white mb-4 tracking-tight">
+                    NobleCockpit <span className="text-gold">– BWA Quick-Check für Kleine und Mittelständische Unternehmen (KMU)</span>
+                  </h3>
+                  <p className="text-white/75 font-body leading-relaxed text-sm md:text-base mb-6 max-w-2xl">
+                    Mit unserem proprietären BWA-Quick-Check analysieren und visualisieren wir Ihre betriebswirtschaftlichen Auswertungen in Minuten. Erkennen Sie versteckte Kostenfresser, Liquiditätsengpässe und Margentreiber auf Knopfdruck – ohne komplexe ERP-Einführungen.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-white/10">
+                    <div className="flex items-center gap-3 text-white/90 text-xs md:text-sm font-body">
+                      <BarChart3 className="text-gold shrink-0" size={18} />
+                      <span>Echtzeit-BWA-Analyse</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/90 text-xs md:text-sm font-body">
+                      <TrendingUp className="text-gold shrink-0" size={18} />
+                      <span>Margen- &amp; Liquiditäts-Radar</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/90 text-xs md:text-sm font-body">
+                      <Zap className="text-gold shrink-0" size={18} />
+                      <span>Sofortige Handlungsempfehlung</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
+                  <div className="mb-4">
+                    <span className="text-[9px] uppercase tracking-widest text-white/40 block">Bereitstellungszeit</span>
+                    <span className="text-2xl font-display text-gold">&lt; 48 Stunden</span>
+                  </div>
+                  <a 
+                    href="#kontakt" 
+                    className="inline-flex items-center gap-2 bg-gold hover:bg-gold/90 text-navy font-bold text-xs uppercase tracking-widest px-6 py-4 transition-all w-full sm:w-auto justify-center"
+                  >
+                    Quick-Check anfragen <ArrowUpRight size={16} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
