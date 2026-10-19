@@ -27,6 +27,10 @@
   --color-gold-active: #644f17;
   --color-gold-highlight: #fdf6e3;
 
+  /* Semantic Feedback */
+  --color-success: #15803d;
+  --color-error: #b91c1c;
+
   /* Fonts */
   --font-display: 'Instrument Serif', 'Playfair Display', Georgia, serif;
   --font-body: 'Work Sans', 'Inter', 'Helvetica Neue', sans-serif;
@@ -41,20 +45,20 @@
 }
 
 [data-theme="dark"] {
-  --color-bg: #050505;
-  --color-surface: #0a0a0a;
-  --color-surface-2: #111111;
-  --color-surface-offset: #161616;
-  --color-divider: #262626;
-  --color-border: #333333;
-  --color-text: #f0f0f0;
-  --color-text-muted: #a0a0a0;
-  --color-text-faint: #555555;
-  --color-text-inverse: #050505;
-  --color-navy: #cbd5e1;
-  --color-navy-hover: #94a3b8;
-  --color-navy-active: #64748b;
-  --color-navy-highlight: #0f172a;
+  --color-bg: #07090e;
+  --color-surface: #0f131d;
+  --color-surface-2: #161b26;
+  --color-surface-offset: #1c2230;
+  --color-divider: #262e40;
+  --color-border: #333d52;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-text-faint: #64748b;
+  --color-text-inverse: #07090e;
+  --color-navy: #f8fafc;
+  --color-navy-hover: #e2e8f0;
+  --color-navy-active: #cbd5e1;
+  --color-navy-highlight: #1e293b;
   --color-gold: #e2bc5e;
   --color-gold-hover: #f0d080;
   --color-gold-active: #f8e1a0;
@@ -72,24 +76,22 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight text-navy;
   }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
 }
 
 .text-fluid-lg  { font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); }
 .text-fluid-xl  { font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem); }
 .text-fluid-2xl { font-size: clamp(2.25rem, 1.5rem + 3vw, 4.5rem); }
-.text-fluid-3xl { font-size: clamp(3rem, 1.5rem + 5vw, 7rem); }
+.text-fluid-3xl { font-size: clamp(3rem, 1.5rem + 5vw, 6.5rem); }
 
-.section-padding { @apply py-24 md:py-40; }
+.section-padding { @apply py-20 md:py-32; }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: var(--transition-ultra);
+/* Custom selection */
+::selection {
+  background-color: #927321;
+  color: #ffffff;
 }
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.skew-bg      { transform: skewY(-2deg); }
-.unskew-content { transform: skewY(2deg); }
