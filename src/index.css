@@ -1,3 +1,9 @@
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource/work-sans/400.css";
+@import "@fontsource/work-sans/500.css";
+@import "@fontsource/work-sans/600.css";
+@import "@fontsource/work-sans/700.css";
 @import "tailwindcss";
 
 @theme {
@@ -15,7 +21,10 @@
   --color-text-faint: #a6a198;
   --color-text-inverse: #fdfcf9;
 
-  /* Primary: Deep Charcoal Navy */
+  /* Headings */
+  --color-heading: #0f172a;
+
+  /* Primary Navy Surface & Buttons */
   --color-navy: #0f172a;
   --color-navy-hover: #1e293b;
   --color-navy-active: #334155;
@@ -26,6 +35,7 @@
   --color-gold-hover: #7b611c;
   --color-gold-active: #644f17;
   --color-gold-highlight: #fdf6e3;
+  --color-gold-text: #ffffff;
 
   /* Semantic Feedback */
   --color-success: #15803d;
@@ -51,30 +61,38 @@
   --color-surface-offset: #1c2230;
   --color-divider: #262e40;
   --color-border: #333d52;
+
   --color-text: #f1f5f9;
   --color-text-muted: #94a3b8;
   --color-text-faint: #64748b;
   --color-text-inverse: #07090e;
-  --color-navy: #f8fafc;
-  --color-navy-hover: #e2e8f0;
-  --color-navy-active: #cbd5e1;
+
+  --color-heading: #f8fafc;
+
+  /* Deep dark navy in dark mode - never white! */
+  --color-navy: #0c121e;
+  --color-navy-hover: #1a2336;
+  --color-navy-active: #28354f;
   --color-navy-highlight: #1e293b;
-  --color-gold: #e2bc5e;
-  --color-gold-hover: #f0d080;
-  --color-gold-active: #f8e1a0;
+
+  --color-gold: #d4a73e;
+  --color-gold-hover: #e2bc5e;
+  --color-gold-active: #f0d080;
   --color-gold-highlight: #1a1508;
+  --color-gold-text: #07090e;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
     @apply text-text bg-bg;
   }
   body {
     @apply font-body antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-navy;
+    @apply font-display tracking-tight text-heading;
   }
 
   :focus-visible {
@@ -83,10 +101,10 @@
   }
 }
 
-.text-fluid-lg  { font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); }
-.text-fluid-xl  { font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem); }
-.text-fluid-2xl { font-size: clamp(2.25rem, 1.5rem + 3vw, 4.5rem); }
-.text-fluid-3xl { font-size: clamp(3rem, 1.5rem + 5vw, 6.5rem); }
+.text-fluid-lg  { font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.25rem); }
+.text-fluid-xl  { font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem); }
+.text-fluid-2xl { font-size: clamp(1.625rem, 1.35rem + 1.2vw, 2.25rem); }
+.text-fluid-3xl { font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem); }
 
 .section-padding { @apply py-20 md:py-32; }
 
